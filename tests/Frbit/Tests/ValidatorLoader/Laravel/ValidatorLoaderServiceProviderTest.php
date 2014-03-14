@@ -267,7 +267,7 @@ class ValidatorLoaderServiceProviderTest extends TestCase
     public function testModifiedPackagePathGuessIsCalculatedCorrectly()
     {
         $provider = $this->generateProvider();
-        $this->assertStringEndsWith('/ValidatorLoaderLaravel/src', $provider->guessPackagePath());
+        $this->assertStringEndsWith('/src', $provider->guessPackagePath());
     }
 
     public function testAllProvidedAreListed()
