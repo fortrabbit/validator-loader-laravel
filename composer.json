@@ -1,6 +1,8 @@
 {
     "name": "frbit/validator-loader-laravel",
-    "description": "",
+    "description": "Service provider to load Laravel validator definitions from files or directories",
+    "license": "MIT",
+    "keywords": ["laravel", "validator", "validation", "service provider"],
     "authors": [
         {
             "name": "Ulrich Kautz",
