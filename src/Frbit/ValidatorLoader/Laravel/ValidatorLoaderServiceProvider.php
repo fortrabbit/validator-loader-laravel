@@ -49,9 +49,13 @@ class ValidatorLoaderServiceProvider extends ServiceProvider
             return call_user_func_array(array($self, 'buildArrayLoader'), $args);
         }, true);
         $this->app->bindIf('validator-loader.directory-factory', function ($app, array $args) use ($self) {
+            $args[0] = $self->resolveValidatorSourcePath($args[0]);
+
             return call_user_func_array(array($self, 'buildDirectoryLoader'), $args);
         }, true);
         $this->app->bindIf('validator-loader.file-factory', function ($app, array $args) use ($self) {
+            $args[0] = $self->resolveValidatorSourcePath($args[0]);
+
             return call_user_func_array(array($self, 'buildFileLoader'), $args);
         }, true);
 
@@ -174,6 +178,22 @@ class ValidatorLoaderServiceProvider extends ServiceProvider
     public function buildFileLoader($source, ValidatorFactory $validator, Filesystem $files)
     {
         return Factory::fromFile($source, $validator, $files);
+    }
+
+    /**
+     * Returns absolute path to validator. Either prefix with app path (if relative) or not
+     *
+     * @param string $source
+     *
+     * @return string
+     */
+    public function resolveValidatorSourcePath($source)
+    {
+        if (0 === strpos($source, DIRECTORY_SEPARATOR)) {
+            return $source;
+        }
+
+        return $this->app->make('path') . DIRECTORY_SEPARATOR . $source;
     }
 
 }

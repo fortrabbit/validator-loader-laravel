@@ -14,7 +14,6 @@ use Frbit\ValidatorLoader\Laravel\ValidatorLoaderServiceProvider;
 class ValidatorLoaderServiceProviderTest extends TestCase
 {
 
-
     /**
      * @var \Mockery\MockInterface
      */
@@ -272,13 +271,31 @@ class ValidatorLoaderServiceProviderTest extends TestCase
 
     public function testAllProvidedAreListed()
     {
-        $provider = new ValidatorLoaderServiceProvider($this->application);
+        $provider = $this->generateProvider();
         $this->assertEquals(array(
             'validator-loader',
             'validator-loader.array-factory',
             'validator-loader.directory-factory',
             'validator-loader.file-factory',
         ), $provider->provides());
+    }
+
+    public function testAbsoluteValidatorSourcePathStaysSameForAbsoluteSource()
+    {
+        $provider = $this->generateProvider();
+        $this->assertStringEndsWith('/foo', $provider->resolveValidatorSourcePath('/foo'));
+    }
+
+    public function testAbsoluteValidatorSourcePathIsPrefixedByAppPathForRelativeSource()
+    {
+        $provider = $this->generateProvider();
+
+        $this->application->shouldReceive('make')
+            ->once()
+            ->with('path')
+            ->andReturn('/app/path');
+
+        $this->assertStringEndsWith('/app/path'. DIRECTORY_SEPARATOR. 'foo', $provider->resolveValidatorSourcePath('foo'));
     }
 
     /**
