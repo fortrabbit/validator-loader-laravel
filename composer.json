@@ -1,0 +1,25 @@
+{
+    "name": "frbit/validator-loader-laravel",
+    "description": "",
+    "authors": [
+        {
+            "name": "Ulrich Kautz",
+            "email": "uk@fortrabbit.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.1.*",
+        "frbit/validator-loader": ">=0.1.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*",
+        "mockery/mockery": "*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Frbit\\ValidatorLoader\\Laravel\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
