@@ -3,7 +3,7 @@
     "description": "Service provider to load Laravel validator definitions from files or directories",
     "license": "MIT",
     "keywords": ["laravel", "validator", "validation", "service provider"],
-    "version": "0.1.1",
+    "version": "0.1.2",
     "authors": [
         {
             "name": "Ulrich Kautz",
@@ -12,7 +12,7 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "illuminate/support": "4.1.*",
+        "illuminate/support": "4.2.*",
         "frbit/validator-loader": ">=0.1.1"
     },
     "require-dev": {
